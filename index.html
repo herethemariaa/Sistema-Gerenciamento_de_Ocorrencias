@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocorrências Escolares</title>
+    <!-- LINKS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doppio+One&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-main">
+        <div class="titulo">
+            <h1>Painel de Ocorrências</h1>
+        </div>
+        <div class="filtros">
+            <input type="text" id="filtroAluno" placeholder="Filtrar por aluno">
+        </div>
+        <select id="filtroTurma">
+            <option value="">Todas as turmas</option>
+        </select>
+    </div>
+    <div class="gerar-pdf">
+        <button>Gerar Relatório em PDF</button>
+    </div>
+    <div class="bttn-add-ocorrencia">
+        <button onclick="">Nova Ocorrência</button> <!--se clicar, exibir div de inputs-->
+    </div>
+    <div class="tabela-ocorrencias">
+        <table>
+          <thead>
+            <tr>
+              <th>Aluno</th>
+              <th>Categoria</th>
+              <th>Motivo</th>
+              <th>Data</th>
+              <th>Responsável</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpo-tabela">
+            <!-- Aqui o JS vai inserir as linhas -->
+          </tbody>
+        </table>
+      </div>
+    <div class="painel-add-ocorrencias">
+        <h3>Cadastrar Ocorrência</h3>
+        Nome do aluno: <input type="text" id="add-aluno" placeholder="Escreva o nome do aluno">
+        Categoria <select id="ocorrencia">
+            <option value="">Tipo de Ocorrência</option>
+            <option value="ausencia">Ausência não autorizada</option>
+            <option value="comportamento">Mau Comportamento</option>
+            <option value="celular">Uso de Celular</option>
+        </select>
+        Motivo: <input type="text" id="descrever-ocorrencia" placeholder="Descreva o motivo da ocorrência">
+        Data: <input type="date" id="data-ocorrencia">
+        Responsável: <input type="text" id="responsavel-ocorrencia" placeholder="Registrado por:">
+    </div>
+
+    <button onclick="adicionarOcorrencia()">Adicionar Ocorrência</button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

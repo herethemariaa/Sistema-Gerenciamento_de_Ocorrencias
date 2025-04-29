@@ -26,40 +26,50 @@
         <button>Gerar Relatório em PDF</button>
     </div>
     <div class="bttn-add-ocorrencia">
-        <button onclick="">Nova Ocorrência</button> <!--se clicar, exibir div de inputs-->
+        <button onclick="mostrarFormulario()">Nova Ocorrência</button>
     </div>
     <div class="tabela-ocorrencias">
         <table>
-          <thead>
-            <tr>
-              <th>Aluno</th>
-              <th>Categoria</th>
-              <th>Motivo</th>
-              <th>Data</th>
-              <th>Responsável</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="corpo-tabela">
-            <!-- Aqui o JS vai inserir as linhas -->
-          </tbody>
+            <thead>
+                <tr>
+                    <th>Aluno</th>
+                    <th>Categoria</th>
+                    <th>Motivo</th>
+                    <th>Data</th>
+                    <th>Responsável</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="corpo-tabela">
+                <!-- Aqui o JS vai inserir as linhas -->
+            </tbody>
         </table>
-      </div>
-    <div class="painel-add-ocorrencias">
-        <h3>Cadastrar Ocorrência</h3>
-        Nome do aluno: <input type="text" id="add-aluno" placeholder="Escreva o nome do aluno">
-        Categoria <select id="ocorrencia">
-            <option value="">Tipo de Ocorrência</option>
-            <option value="ausencia">Ausência não autorizada</option>
-            <option value="comportamento">Mau Comportamento</option>
-            <option value="celular">Uso de Celular</option>
-        </select>
-        Motivo: <input type="text" id="descrever-ocorrencia" placeholder="Descreva o motivo da ocorrência">
-        Data: <input type="date" id="data-ocorrencia">
-        Responsável: <input type="text" id="responsavel-ocorrencia" placeholder="Registrado por:">
     </div>
 
-    <button onclick="adicionarOcorrencia()">Adicionar Ocorrência</button>
+    <!--MODAL PRA CADASTRAR O INPUT-->
+    <div class="modal" id="modal" style="display: none;">
+        <div class="painel-add-ocorrencias" id="formOcorrencia">
+            <form id="form-ocorrencia">
+                <h3>Cadastrar Ocorrência</h3>
+                Nome do aluno: <input type="text" id="add-aluno" placeholder="Escreva o nome do aluno">
+                Categoria: 
+                <select id="ocorrencia">
+                    <option value="">Tipo de Ocorrência</option>
+                    <option value="ausencia">Ausência não autorizada</option>
+                    <option value="comportamento">Mau Comportamento</option>
+                    <option value="celular">Uso de Celular</option>
+                </select>
+                Motivo: <input type="text" id="descrever-ocorrencia" placeholder="Descreva o motivo da ocorrência">
+                Data: <input type="date" id="data-ocorrencia">
+                Responsável: <input type="text" id="responsavel-ocorrencia" placeholder="Registrado por:">
+                <br><br>
+                <div class="modal-buttons">
+                    <button class="add-bttn" type="button" onclick="adicionarOcorrencia()">Adicionar</button>
+                    <button class="cancel-bttn" type="button" onclick="fecharModal()">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <script src="js/main.js"></script>
 </body>

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocorrências Escolares</title>
     <!-- LINKS -->
+    <link rel="shortcut icon" href="imgs/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Doppio+One&family=Hammersmith+One&display=swap" rel="stylesheet">
@@ -12,22 +13,22 @@
 </head>
 <body>
     <div class="container-main">
+        <div class="img-main"><img src="imgs/logo.png" alt=""></div>
         <div class="titulo">
             <h1>Painel de Ocorrências</h1>
         </div>
         <div class="filtros">
-            <input type="text" id="filtroAluno" placeholder="Filtrar por aluno">
+            <input type="text" id="filtroAluno" placeholder="Filtrar por aluno" oninput="filtro()">
         </div>
         <select id="filtroTurma">
             <option value="">Todas as turmas</option>
         </select>
     </div>
-    <div class="gerar-pdf">
-        <button>Gerar Relatório em PDF</button>
-    </div>
-    <div class="bttn-add-ocorrencia">
-        <button onclick="mostrarFormulario()">Nova Ocorrência</button>
-    </div>
+    <div class="botoes-acoes">
+        <button class="gerar-pdf">Gerar Relatório</button>
+        <button class="bttn-add-ocorrencia" onclick="mostrarFormulario()">Adicionar Ocorrência</button>
+      </div>
+      
     <div class="tabela-ocorrencias">
         <table>
             <thead>
@@ -70,7 +71,6 @@
             </form>
         </div>
     </div>
-
     <script src="js/main.js"></script>
 </body>
 </html>

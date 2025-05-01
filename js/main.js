@@ -1,8 +1,6 @@
-// passo 1 - EXIBIR MODAL COM FORMULÁRIO
-
 function mostrarFormulario() {
     const modal = document.getElementById("modal")
-    modal.style.display = "flex" // exibindo o modal
+    modal.style.display = "flex"
 }
 
 function fecharModal() {
@@ -17,8 +15,7 @@ window.addEventListener("click", function(event) {
     }
 })
 
-// passo 2 - VALIDAR E PREENCHER INPUTS
-
+// Adiciona nova ocorrência
 function adicionarOcorrencia() {
     const aluno = document.getElementById("add-aluno").value
     const categoria = document.getElementById("ocorrencia").value
@@ -36,15 +33,22 @@ function adicionarOcorrencia() {
         categoria,
         motivo,
         data,
-        responsavel,
+        responsavel
     }
 
     const ocorrencias = JSON.parse(localStorage.getItem("ocorrencias")) || []
 
-    ocorrencias.push(novaOcorrencia)
+    const indiceEditando = localStorage.getItem("indiceEditando")
+    if (indiceEditando !== null) {
+        ocorrencias[indiceEditando] = novaOcorrencia
+        localStorage.removeItem("indiceEditando")
+    } else {
+        ocorrencias.push(novaOcorrencia)
+    }
+
     localStorage.setItem("ocorrencias", JSON.stringify(ocorrencias))
 
-    alert("Ocorrência adicionada com sucesso!")
+    alert("Ocorrência salva com sucesso!")
 
     document.getElementById("add-aluno").value = ""
     document.getElementById("ocorrencia").value = ""
@@ -53,17 +57,15 @@ function adicionarOcorrencia() {
     document.getElementById("responsavel-ocorrencia").value = ""
 
     fecharModal()
-    
     exibirOcorrencias()
 }
 
-// passo 3 - TABELA PRA EXIBIR AS INFORMAÇÕES DO FORM
-
-function exibirOcorrencias() {
+// Exibe ocorrências na tabela
+function exibirOcorrencias(lista = null) {
     const corpoTabela = document.getElementById("corpo-tabela")
     corpoTabela.innerHTML = ""
 
-    const ocorrencias = JSON.parse(localStorage.getItem("ocorrencias")) || []
+    const ocorrencias = lista || JSON.parse(localStorage.getItem("ocorrencias")) || []
 
     ocorrencias.forEach((ocorrencia, index) => {
         const linha = `
@@ -74,8 +76,12 @@ function exibirOcorrencias() {
                 <td>${ocorrencia.data}</td>
                 <td>${ocorrencia.responsavel}</td>
                 <td>
-                    <button onclick="removerOcorrencia(${index})">Remover</button>
-                    <button onclick="editarOcorrencia(${index})">Editar</button>
+                <button onclick="editarOcorrencia(${index})" aria-label="Editar ocorrência" style="background-color: #F28705">
+                    <img src="imgs/editar.png" alt="Editar" style="width: 18px; height: 18px;">
+                </button>
+                <button onclick="removerOcorrencia(${index})" aria-label="Remover ocorrência" style="background-color: #ff4444">
+                    <img src="imgs/lixo.png" alt="Excluir" style="width: 18px; height: 18px;">
+                </button>
                 </td>
             </tr>
         `
@@ -83,4 +89,41 @@ function exibirOcorrencias() {
     })
 }
 
-//funções para botão remover
+// Edita uma ocorrência
+function editarOcorrencia(index) {
+    const ocorrencias = JSON.parse(localStorage.getItem("ocorrencias")) || []
+    const ocorrencia = ocorrencias[index]
+
+    document.getElementById("add-aluno").value = ocorrencia.aluno
+    document.getElementById("ocorrencia").value = ocorrencia.categoria
+    document.getElementById("descrever-ocorrencia").value = ocorrencia.motivo
+    document.getElementById("data-ocorrencia").value = ocorrencia.data
+    document.getElementById("responsavel-ocorrencia").value = ocorrencia.responsavel
+
+    mostrarFormulario()
+    localStorage.setItem("indiceEditando", index)
+}
+
+// Remove uma ocorrência
+function removerOcorrencia(index) {
+    const ocorrencias = JSON.parse(localStorage.getItem("ocorrencias")) || []
+    ocorrencias.splice(index, 1)
+    localStorage.setItem("ocorrencias", JSON.stringify(ocorrencias))
+    exibirOcorrencias()
+}
+
+
+function filtro(){
+    const nomeDigitado = document.getElementById("filtroAluno").value.toLowerCase()
+    const todasOcorrencias = JSON.parse(localStorage.getItem("ocorrencias")) || []
+
+    const resultados = todasOcorrencias.filter(ocorrencias =>
+        ocorrencias.aluno.toLowerCase().includes(nomeDigitado)
+    )
+    exibirOcorrencias(resultados)
+}
+// Inicializa a tabela ao carregar a página
+window.onload = () => {
+    exibirOcorrencias();
+    document.getElementById("filtroAluno").addEventListener("input", filtro);
+}

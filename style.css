@@ -1,3 +1,10 @@
+/* === BOX-SIZING GLOBAL PARA FACILITAR O CONTROLE DE LARGURA E PADDING === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /* Fonte principal */
 body {
   font-family: 'Hammersmith One', sans-serif;
@@ -13,11 +20,17 @@ body {
   padding: 30px 15px;
   background-color: #fff;
   border-bottom: 3px solid #0678BF;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
 }
-.img-main img{
-  width: 100px; 
+
+.img-main img {
+  max-width: 100%;
   height: auto;
+  width: 100px;
 }
+
 h1 {
   color: #1DA1F2;
   font-size: 2.5em;
@@ -33,6 +46,8 @@ h1 {
   background-color: #fff;
   border-radius: 12px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+  width: 90%;
+  overflow-x: auto; /* deixa a tabela scrollável horizontalmente se pequena */
 }
 
 /* Botões de ação */
@@ -44,6 +59,8 @@ h1 {
   margin: 20px auto;
   max-width: 800px;
   padding: 0 15px;
+  width: 90%;
+  flex-wrap: wrap; /* permite quebrar em mais linhas no mobile */
 }
 
 button {
@@ -58,6 +75,8 @@ button {
   font-size: 1em;
   cursor: pointer;
   transition: background 0.3s ease;
+  white-space: nowrap; /* impede quebra dentro do botão */
+  flex-shrink: 0; /* não deixa o botão encolher */
 }
 
 button:hover {
@@ -73,10 +92,13 @@ input,
 select,
 textarea {
   padding: 10px;
-  margin: 5px;
+  margin: 5px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 1em;
+  width: 100%; /* para responsividade */
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 /* Tabela */
@@ -84,6 +106,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
+  min-width: 600px; /* força largura mínima para melhor visualização */
 }
 
 th, td {
@@ -95,6 +118,7 @@ th, td {
 th {
   background-color: #1B8BEF;
   color: #fff;
+  font-weight: 600;
 }
 
 td button {
@@ -125,14 +149,20 @@ td button:hover img {
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 15px; /* para não encostar nas bordas da tela */
+  box-sizing: border-box;
 }
 
 .painel-add-ocorrencias {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 /* Formulário */
@@ -156,6 +186,8 @@ td button:hover img {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Botões do modal */
@@ -163,6 +195,7 @@ td button:hover img {
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  flex-wrap: wrap;
 }
 
 button.add-bttn {
@@ -172,6 +205,8 @@ button.add-bttn {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  flex: 1;
+  min-width: 120px;
 }
 
 button.cancel-bttn {
@@ -181,4 +216,67 @@ button.cancel-bttn {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  flex: 1;
+  min-width: 120px;
+}
+
+/* === MEDIA QUERIES PARA RESPONSIVIDADE === */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2em;
+  }
+
+  .container-main,
+  .filtros,
+  .tabela-ocorrencias,
+  .botoes-acoes {
+    width: 95%;
+    max-width: none;
+    padding: 10px;
+  }
+
+  button {
+    font-size: 0.95em;
+    padding: 8px 12px;
+  }
+
+  .botoes-acoes {
+    justify-content: center;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.6em;
+  }
+
+  .botoes-acoes {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 0;
+  }
+
+  .modal-buttons {
+    flex-direction: column;
+  }
+
+  button.add-bttn,
+  button.cancel-bttn {
+    min-width: 100%;
+  }
+
+  /* Tabela horizontal scroll */
+  .tabela-ocorrencias {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 100%;
+  }
 }

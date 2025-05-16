@@ -1,3 +1,5 @@
+//lógica utilizada para o modal do formulário
+
 function mostrarFormulario() {
     const modal = document.getElementById("modal")
     modal.style.display = "flex"
@@ -14,6 +16,10 @@ window.addEventListener("click", function(event) {
         fecharModal()
     }
 })
+
+//tudo o que fizemos aqui basicamente foi criar três funções diferentes 
+// onde uma delas serve para adicionar os eventos de abrir e fechar o modal 
+// ao clicar. esse tipo de função também conta com a lógica de estilização
 
 // Adiciona nova ocorrência
 function adicionarOcorrencia() {
@@ -111,7 +117,6 @@ function removerOcorrencia(index) {
     localStorage.setItem("ocorrencias", JSON.stringify(ocorrencias))
     exibirOcorrencias()
 }
-
 
 function filtro(){
     const nomeDigitado = document.getElementById("filtroAluno").value.toLowerCase()

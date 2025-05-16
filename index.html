@@ -20,16 +20,13 @@
         <div class="filtros">
             <input type="text" id="filtroAluno" placeholder="Filtrar por aluno" oninput="filtro()">
         </div>
-        <select id="filtroTurma">
-            <option value="">Todas as turmas</option>
-        </select>
     </div>
     <div class="botoes-acoes">
-        <button class="gerar-pdf">Gerar Relatório</button>
+        <button class="gerar-pdf" onclick="gerarPDF()">Imprimir</button>
         <button class="bttn-add-ocorrencia" onclick="mostrarFormulario()">Adicionar Ocorrência</button>
       </div>
       
-    <div class="tabela-ocorrencias">
+    <div class="tabela-ocorrencias" id="tabela-ocorrencias">
         <table>
             <thead>
                 <tr>
@@ -71,6 +68,8 @@
             </form>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="js/pdf.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

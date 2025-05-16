@@ -83,10 +83,10 @@ function exibirOcorrencias(lista = null) {
                 <td>${ocorrencia.responsavel}</td>
                 <td>
                 <button onclick="editarOcorrencia(${index})" aria-label="Editar ocorrência" style="background-color: #F28705">
-                    <img src="imgs/editar.png" alt="Editar" style="width: 18px; height: 18px;">
+                    <img src="editar.png" alt="Editar" style="width: 18px; height: 18px;">
                 </button>
                 <button onclick="removerOcorrencia(${index})" aria-label="Remover ocorrência" style="background-color: #ff4444">
-                    <img src="imgs/lixo.png" alt="Excluir" style="width: 18px; height: 18px;">
+                    <img src="lixo.png" alt="Excluir" style="width: 18px; height: 18px;">
                 </button>
                 </td>
             </tr>

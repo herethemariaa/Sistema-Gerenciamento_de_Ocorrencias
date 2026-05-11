@@ -5,26 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ocorrências Escolares</title>
     <!-- LINKS -->
-    <link rel="shortcut icon" href="8074788.png" type="image/x-icon">
+    <link rel="shortcut icon" href="imgs/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Doppio+One&family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- HEADER PRINCIPAL -->
     <div class="container-main">
-        <div class="img-main"><img src="imgs/logo.png" alt=""></div>
         <div class="titulo">
             <h1>Painel de Ocorrências</h1>
+            <p>Gerencie as ocorrências escolares de forma eficiente</p>
         </div>
         <div class="filtros">
-            <input type="text" id="filtroAluno" placeholder="Filtrar por aluno" oninput="filtro()">
+            <input type="text" id="filtroAluno" placeholder="Filtrar por aluno, categoria ou responsável..." oninput="filtro()">
         </div>
     </div>
+
+    <div class="dashboard-stats">
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-chart-bar"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Total de Ocorrências</h3>
+                <p class="stat-number" id="total-ocorrencias">0</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-ban"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Ausências</h3>
+                <p class="stat-number" id="total-ausencias">0</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-exclamation-circle"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Comportamento</h3>
+                <p class="stat-number" id="total-comportamento">0</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="stat-info">
+                <h3>Uso de Celular</h3>
+                <p class="stat-number" id="total-celular">0</p>
+            </div>
+        </div>
+    </div>
+
     <div class="botoes-acoes">
-        <button class="gerar-pdf" onclick="gerarPDF()">Imprimir</button>
-        <button class="bttn-add-ocorrencia" onclick="mostrarFormulario()">Adicionar Ocorrência</button>
-      </div>
+        <button class="gerar-pdf" onclick="gerarPDF()">
+            <i class="fas fa-download"></i> Imprimir
+        </button>
+        <button class="bttn-add-ocorrencia" onclick="mostrarFormulario()">
+            <i class="fas fa-plus"></i> Adicionar Ocorrência
+        </button>
+    </div>
       
     <div class="tabela-ocorrencias" id="tabela-ocorrencias">
         <table>
@@ -39,36 +88,45 @@
                 </tr>
             </thead>
             <tbody id="corpo-tabela">
-                <!-- Aqui o JS vai inserir as linhas -->
+                <!--js insere aqui-->
             </tbody>
         </table>
     </div>
 
-    <!--MODAL PRA CADASTRAR O INPUT-->
     <div class="modal" id="modal" style="display: none;">
         <div class="painel-add-ocorrencias" id="formOcorrencia">
             <form id="form-ocorrencia">
                 <h3>Cadastrar Ocorrência</h3>
-                Nome do aluno: <input type="text" id="add-aluno" placeholder="Escreva o nome do aluno">
-                Categoria: 
+                <label for="add-aluno">Nome do aluno:</label>
+                <input type="text" id="add-aluno" placeholder="Digite o nome do aluno">
+                
+                <label for="ocorrencia">Categoria:</label>
                 <select id="ocorrencia">
-                    <option value="">Tipo de Ocorrência</option>
+                    <option value="">Selecione uma categoria</option>
                     <option value="ausencia">Ausência não autorizada</option>
                     <option value="comportamento">Mau Comportamento</option>
                     <option value="celular">Uso de Celular</option>
                 </select>
-                Motivo: <input type="text" id="descrever-ocorrencia" placeholder="Descreva o motivo da ocorrência">
-                Data: <input type="date" id="data-ocorrencia">
-                Responsável: <input type="text" id="responsavel-ocorrencia" placeholder="Registrado por:">
-                <br><br>
+                
+                <label for="descrever-ocorrencia">Motivo:</label>
+                <input type="text" id="descrever-ocorrencia" placeholder="Descreva o motivo da ocorrência">
+                
+                <label for="data-ocorrencia">Data:</label>
+                <input type="date" id="data-ocorrencia">
+                
+                <label for="responsavel-ocorrencia">Responsável:</label>
+                <input type="text" id="responsavel-ocorrencia" placeholder="Registrado por:">
+                
                 <div class="modal-buttons">
-                    <button class="add-bttn" type="button" onclick="adicionarOcorrencia()">Adicionar</button>
                     <button class="cancel-bttn" type="button" onclick="fecharModal()">Cancelar</button>
+                    <button class="add-bttn" type="button" onclick="adicionarOcorrencia()">Adicionar</button>
                 </div>
             </form>
         </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script src="js/pdf.js"></script>
     <script src="js/main.js"></script>
 </body>
